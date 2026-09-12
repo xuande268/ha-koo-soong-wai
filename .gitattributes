@@ -1,0 +1,4 @@
+# Store text with LF in the repo and let git convert per platform on checkout,
+# so Windows and macOS contributors don't churn every line.
+* text=auto
+*.png binary

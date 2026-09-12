@@ -1,0 +1,8 @@
+# Build output: a duplicate of index.html minus the document wrapper, generated
+# by build.js for hosted publishing. index.html is the deliverable; this is derived.
+artifact.html
+
+# OS cruft
+Thumbs.db
+desktop.ini
+.DS_Store
