@@ -46,6 +46,14 @@ const ICONS = {
   send: '<path d="M21 3 10.5 13.5"/><path d="M21 3l-6.8 18-3.7-7.5L3 9.8z"/>',
   lock: '<rect x="4.5" y="10.5" width="15" height="10" rx="2.4"/><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9"/>',
   eye: '<path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.9"/>',
+  more: '<circle cx="5.2" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="18.8" cy="12" r="1.7" fill="currentColor" stroke="none"/>',
+  cart: '<circle cx="9.5" cy="20" r="1.5"/><circle cx="17.5" cy="20" r="1.5"/><path d="M2.5 3.5h2.9l2.5 11.2a1.8 1.8 0 0 0 1.8 1.4h7.6a1.8 1.8 0 0 0 1.8-1.4l1.6-7.2H6.2"/>',
+  chat: '<path d="M20.5 12.2c0 4.2-3.8 7.6-8.5 7.6a9.8 9.8 0 0 1-2.7-.4L4.5 21l1.2-3.6a7.2 7.2 0 0 1-2.2-5.2C3.5 8 7.3 4.6 12 4.6s8.5 3.4 8.5 7.6z"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><path d="M15.6 8.4 13.9 14l-5.5 1.7L10 10z"/>',
+  bag: '<path d="M4.5 7.5h15l-1.2 12.2a1.6 1.6 0 0 1-1.6 1.4H7.3a1.6 1.6 0 0 1-1.6-1.4z"/><path d="M8.6 10V6.6a3.4 3.4 0 0 1 6.8 0V10"/>',
+  hourglass: '<path d="M7 3.5h10"/><path d="M7 20.5h10"/><path d="M8.2 3.5v3.4c0 2 3.8 3.6 3.8 5.1s-3.8 3.1-3.8 5.1v3.4"/><path d="M15.8 3.5v3.4c0 2-3.8 3.6-3.8 5.1s3.8 3.1 3.8 5.1v3.4"/>',
+  spark: '<path d="M12 3.5 13.9 9l5.6 1.9-5.6 1.9L12 18.4l-1.9-5.6L4.5 10.9 10.1 9z"/>',
+  wallet: '<path d="M3.5 7.6a2 2 0 0 1 2-2h11.6a2 2 0 0 1 2 2"/><rect x="3.5" y="7.6" width="17" height="12.4" rx="2.4"/><path d="M15.6 13.8h3.4"/><path d="M3.5 10.6h14a2 2 0 0 1 2 2v1.2"/>',
 };
 
 function ic(name, size = 22, sw = 1.8, cls = '') {
@@ -55,14 +63,37 @@ function ic(name, size = 22, sw = 1.8, cls = '') {
     aria-hidden="true">${d}</svg>`;
 }
 
-/* --- brand mark --------------------------------------------------------- */
+/* --- brand mark — the mockup's bare heart, two figures inside ----------- */
+let markSeq = 0;
 function mark(size = 40) {
+  const id = 'hk-heart-' + (++markSeq);
+  const heart = 'M24 43.4S4.6 31.6 4.6 18.5A10.8 10.8 0 0 1 24 11.4a10.8 10.8 0 0 1 19.4 7.1C43.4 31.6 24 43.4 24 43.4z';
   return `<svg class="rail__mark" width="${size}" height="${size}" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-    <rect width="48" height="48" rx="13" fill="#9B1B3A"/>
-    <path d="M24 37.5s-11-6.6-11-14a6.1 6.1 0 0 1 11-3.4 6.1 6.1 0 0 1 11 3.4c0 7.4-11 14-11 14z" fill="#fff" fill-opacity=".95"/>
-    <circle cx="18.2" cy="17.4" r="3.1" fill="#9B1B3A"/>
-    <circle cx="29.8" cy="17.4" r="3.1" fill="#9B1B3A"/>
-    <path d="M21.1 26.4h5.8M24 23.4v6" stroke="#9B1B3A" stroke-width="1.9" stroke-linecap="round"/>
+    <defs><clipPath id="${id}"><path d="${heart}"/></clipPath></defs>
+    <path d="${heart}" fill="#9E1B3C"/>
+    <g clip-path="url(#${id})">
+      <circle cx="18.6" cy="17.4" r="3.9" fill="#fff"/>
+      <circle cx="29.4" cy="17.4" r="3.9" fill="#fff"/>
+      <path d="M11.6 31a5.8 5.8 0 0 1 11.6 0z" fill="#fff"/>
+      <path d="M24.8 31a5.8 5.8 0 0 1 11.6 0z" fill="#fff"/>
+    </g>
+  </svg>`;
+}
+
+/* --- the map illustration ----------------------------------------------- */
+function mapFig() {
+  return `<svg width="100%" height="100%" viewBox="0 0 340 158" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="340" height="158" fill="#EDF0F2"/>
+    <path d="M0 46h340M0 112h340M64 0v158M186 0v158M268 0v158" stroke="#fff" stroke-width="7"/>
+    <path d="M0 46h340M0 112h340M64 0v158M186 0v158M268 0v158" stroke="#E2E6E9" stroke-width="1"/>
+    <rect x="76" y="58" width="96" height="42" rx="4" fill="#DFEADF"/>
+    <rect x="200" y="8" width="58" height="30" rx="4" fill="#E4E9EE"/>
+    <rect x="200" y="120" width="58" height="30" rx="4" fill="#E4E9EE"/>
+    <path d="M0 138h340" stroke="#CFE0EA" stroke-width="12"/>
+  </svg>
+  <svg width="34" height="44" viewBox="0 0 34 44" fill="none" style="position:absolute;left:50%;top:44%;transform:translate(-50%,-100%)" aria-hidden="true">
+    <path d="M17 43S2 26.5 2 16.4A15 15 0 1 1 32 16.4C32 26.5 17 43 17 43z" fill="#9E1B3C"/>
+    <circle cx="17" cy="16" r="5.6" fill="#fff"/>
   </svg>`;
 }
 
@@ -78,6 +109,8 @@ function seedState() {
     quiz: {},              // courseId -> { picked: [], passed: false }
     circle: ['prasert', 'malee', 'boonmee'],
     joined: ['chair'],
+    favs: [],              // neighbours starred on the home carousel
+    heroIdx: 0,            // which carousel card is showing
     checkins: [],          // completed check-ins
     sessions: [],          // completed activity sessions
     cases: DATA.cases.map(c => ({ ...c })),
@@ -180,6 +213,16 @@ function toast(msg, icon = 'check-circle') {
   toastTimer = setTimeout(() => { host.innerHTML = ''; }, 3800);
 }
 function closeSheet() { $('#sheet-host').innerHTML = ''; }
+/* The scrim carries the close action rather than stopping propagation on the
+   sheet — stopPropagation would also block the delegated handler, leaving every
+   button inside the sheet dead. */
+function openSheet(inner) {
+  $('#sheet-host').innerHTML = `<div class="scrim" data-act="sheet-close">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet__grab"></div>${inner}
+    </div>
+  </div>`;
+}
 
 /* ==========================================================================
    Check-in draft + triage rules
@@ -281,102 +324,104 @@ const NOTE_OF = {
    ========================================================================== */
 const V = {};
 
-/* ---- mentor: home ------------------------------------------------------ */
+/* ---- mentor: home — the mockup's screen 1 ------------------------------ */
+function greeting() {
+  const h = new Date().getHours();
+  return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
+}
+
 V.home = () => {
   const m = DATA.mentor;
   const certified = S.certified.length > 0;
-  const due = DATA.seniors.filter(s => S.circle.includes(s.id) && s.nextDue.startsWith('Today'));
-  const today = DATA.activities.filter(a => S.joined.includes(a.id) && a.day.includes('Tuesday'));
   const circle = DATA.seniors.filter(s => S.circle.includes(s.id));
+  const dueToday = circle.filter(s => s.nextDue.startsWith('Today'));
+  const today = DATA.activities.filter(a => S.joined.includes(a.id) && a.day.includes('Tuesday'));
+
+  // the carousel leads with whoever is due, then the rest of the circle
+  const feed = [...dueToday, ...circle.filter(s => !dueToday.includes(s))];
+  const idx = Math.min(S.heroIdx || 0, Math.max(0, feed.length - 1));
+  const p = feed[idx];
 
   return `
-  <div class="hero">
-    <div class="hero__top">
-      ${av(m, 56)}
-      <div style="flex:1;min-width:0">
-        <div class="hero__name">${esc(m.name)}</div>
-        <div class="hero__meta">
-          <span class="pill-verified">${ic(certified ? 'shield' : 'clock', 13, 2.4)}
-          ${certified ? `Certified mentor · ${S.certified.length} module${S.certified.length > 1 ? 's' : ''}` : 'Trainee mentor'}</span>
-        </div>
-      </div>
-    </div>
-    <div class="hero__strip">
-      <div class="hero__stat"><b class="tnum">${oneDp(weekHours())}</b><span>hours this week</span></div>
-      <div class="hero__stat"><b class="tnum">${S.circle.length}</b><span>people you support</span></div>
-      <div class="hero__stat"><b class="tnum">${S.checkins.length}</b><span>check-ins logged</span></div>
-    </div>
+  <div class="greet">
+    <div class="greet__hi">${greeting()}, ${esc(m.name.replace(/^Mrs\.\s*/, ''))}</div>
+    <h1 class="greet__h">${dueToday.length ? 'Who needs you today' : 'Your circle'}</h1>
+    <p class="greet__s">${feed.length} ${feed.length === 1 ? 'neighbour' : 'neighbours'} in your circle${
+      dueToday.length ? ` · ${dueToday.length} check-in due` : ''}</p>
   </div>
 
-  <div class="pad">
-    ${!certified ? `
-    <button class="card card--pad" data-act="nav" data-to="#/train" style="text-align:left;display:flex;gap:13px;align-items:center;width:100%">
-      <span class="row__ic row__ic--warn">${ic('award', 21)}</span>
+  ${!certified ? `
+  <div style="padding:0 16px">
+    <button class="card card--pad" data-act="nav" data-to="#/train"
+      style="text-align:left;display:flex;gap:13px;align-items:center;width:100%;border-left:3px solid var(--warn-500)">
+      <span class="row__ic row__ic--warn">${ic('award', 22)}</span>
       <span class="row__b">
-        <span class="row__t">Finish your first module to be certified</span>
-        <span class="row__s">Nurse Anong can only assign you a neighbour once you hold a certificate.</span>
+        <span class="row__t row__t--strong">Finish a module to be certified</span>
+        <span class="row__s">Nurse Anong can only assign a neighbour once you hold a certificate.</span>
       </span>
-      <span class="row__chev">${ic('chev-right', 19, 2.2)}</span>
-    </button>` : ''}
+      <span class="row__chev">${ic('chev-right', 20, 2.2)}</span>
+    </button>
+  </div>` : ''}
 
-    ${due.length ? `
-    <div class="card card--pad" style="border-left:3px solid var(--warn-500)">
-      <div class="row-between" style="align-items:flex-start">
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <span class="row__ic row__ic--warn">${ic('bell', 21)}</span>
-          <div>
-            <div class="row__t">Check-in due today</div>
-            <div class="row__s">${due.map(s => esc(s.name)).join(', ')} — last visit was a week ago.</div>
-          </div>
+  ${p ? `
+  <div style="padding:0 16px">
+    <div class="hero-card">
+      <div class="hero-card__media">
+        <div class="media ${p.av}"><span class="media__mono">${p.initials}</span></div>
+        ${feed.length > 1
+          ? `<button class="media__tap" data-act="hero-next" aria-label="Show the next neighbour"></button>`
+          : ''}
+        <span class="media__badge">${ic('shield', 14, 2.3)}${certified ? 'Verified neighbour' : 'Awaiting your certificate'}</span>
+        <button class="fav" aria-pressed="${S.favs.includes(p.id)}" data-act="fav" data-id="${p.id}"
+          aria-label="${S.favs.includes(p.id) ? 'Remove from favourites' : 'Save to favourites'}">${ic('heart', 23, 2)}</button>
+      </div>
+      <div class="hero-card__body">
+        <div class="hero-card__top">
+          <span class="hero-card__name">${esc(p.name)}, ${p.age}</span>
+          <span class="chip chip--good">${p.interest}% match</span>
         </div>
+        <div class="hero-card__meta">${ic('map-pin', 17, 2.1)}${esc(p.area)}</div>
+        <div class="chips hero-card__chips">${p.needs.map(n => chip(n)).join('')}</div>
+        <div class="hero-card__rule"></div>
+        <div class="hero-card__foot">
+          <span class="hero-card__when">${ic('calendar', 19, 2.1)}
+            <span>${p.nextDue.startsWith('Today') ? 'Due today' : esc(p.nextDue)}</span></span>
+          <span class="hero-card__worth"><b>45 min</b>estimated visit</span>
+        </div>
+        <button class="btn btn--primary btn--block" data-act="nav" data-to="#/checkin/${p.id}">
+          Check in on ${esc(p.name.split(' ').slice(-1)[0])} ${ic('arrow-right', 20, 2.2)}
+        </button>
       </div>
-      <div class="stack stack--sm" style="margin-top:13px">
-        ${due.map(s => `<button class="btn btn--primary btn--block" data-act="nav" data-to="#/checkin/${s.id}">
-          ${ic('clipboard', 18, 2.1)} Check in on ${esc(s.name.split(' ')[1] || s.name)}</button>`).join('')}
-      </div>
+    </div>
+    ${feed.length > 1 ? `<div class="dots" style="margin-top:14px" aria-hidden="true">
+      ${feed.map((s, i) => `<i class="${i === idx ? 'on' : ''}"></i>`).join('')}
     </div>` : ''}
+  </div>` : `
+  <div style="padding:0 16px"><div class="card"><div class="empty">
+    <div class="empty__ic">${ic('users', 26)}</div>
+    <div class="empty__t">Nobody in your circle yet</div>
+    <div class="empty__s">Offer to support a neighbour and they will appear here with their visit history.</div>
+    <button class="btn btn--primary" style="margin-top:15px" data-act="nav" data-to="#/circle">Find someone nearby</button>
+  </div></div></div>`}
 
+  <div class="pad pad--top">
     ${sectionHead('Today')}
     ${today.length ? `<div class="card">${today.map(a => `
       <button class="row" data-act="nav" data-to="#/activity/${a.id}">
-        <span class="row__ic">${ic(a.icon, 21)}</span>
+        <span class="row__ic row__ic--brand">${ic(a.icon, 22)}</span>
         <span class="row__b">
-          <span class="row__t">${esc(a.title)}</span>
+          <span class="row__t row__t--strong">${esc(a.title)}</span>
           <span class="row__s">${esc(a.time)} · ${esc(a.place)}</span>
         </span>
-        <span class="chip chip--good">${ic('check', 12, 3)}Going</span>
+        <span class="chip chip--good">${ic('check', 13, 3)}Going</span>
       </button>`).join('')}</div>`
       : `<div class="card card--pad center"><div class="row__s" style="margin:0">Nothing scheduled today. Your next group is on Thursday.</div></div>`}
 
-    ${sectionHead('Quick actions')}
-    <div class="quick">
-      <button data-act="nav" data-to="#/circle">
-        <span class="quick__ic">${ic('clipboard', 20)}</span>
-        <span class="quick__t">Log a check-in</span>
-        <span class="quick__s">Visit and record</span>
-      </button>
-      <button data-act="nav" data-to="#/train">
-        <span class="quick__ic">${ic('book', 20)}</span>
-        <span class="quick__t">Academy</span>
-        <span class="quick__s">${S.certified.length} of ${DATA.courses.length} done</span>
-      </button>
-      <button data-act="nav" data-to="#/circle">
-        <span class="quick__ic">${ic('users', 20)}</span>
-        <span class="quick__t">Find someone to help</span>
-        <span class="quick__s">${DATA.seniors.filter(s => !S.circle.includes(s.id)).length} nearby</span>
-      </button>
-      <button data-act="nav" data-to="#/activity/walk">
-        <span class="quick__ic">${ic('walk', 20)}</span>
-        <span class="quick__t">Walking group</span>
-        <span class="quick__s">Thursday 6:30</span>
-      </button>
-    </div>
-
-    ${sectionHead('Your circle', `${circle.length} people`)}
+    ${sectionHead('Your circle', `${circle.length} ${circle.length === 1 ? 'person' : 'people'}`)}
     <div class="card">
       ${circle.map(s => row({
         icon: 'user', title: esc(s.name) + `, ${s.age}`,
-        sub: `${esc(s.area)} · next visit: ${esc(s.nextDue.toLowerCase())}`,
+        sub: `${esc(s.area)} · ${s.nextDue.startsWith('Today') ? 'check-in due today' : esc(s.nextDue.toLowerCase())}`,
         act: 'nav', data: `data-to="#/senior/${s.id}"`,
       })).join('')}
     </div>
@@ -739,28 +784,61 @@ V.senior = ({ a: id }) => {
   })), ...s.history];
   const cases = S.cases.filter(c => c.seniorId === s.id);
 
+  const NEED_ICON = { 'Blood pressure check': 'pulse', 'Medication reminders': 'pill', 'Company': 'chat', 'Walking companion': 'walk', 'Grocery help': 'cart', 'Conversation': 'chat', 'Post-fall check-ins': 'shield', 'Home safety help': 'home', 'Social connection': 'users', 'Wellbeing check-ins': 'heart', 'Medication routine': 'pill', 'Newly retired': 'spark' };
+
   return `
-  <div class="pad">
-    <div class="card card--pad">
-      <div style="display:flex;gap:14px;align-items:flex-start">
-        ${avWrap(s, 72, mine)}
-        <div style="flex:1;min-width:0">
-          <div style="font-size:var(--t-22);font-weight:700;letter-spacing:-.02em">${esc(s.name)}, ${s.age}</div>
-          <div class="row__s">${esc(s.area)}</div>
-          <div class="chips" style="margin-top:9px">
-            ${s.livesAlone ? chip('Lives alone') : chip('Lives with family')}
-            ${mine ? chip('In your circle', 'good', 'check') : chip('Not yet assigned', 'warn')}
-          </div>
-        </div>
+  <div class="pad pad--top">
+    <div class="phero">
+      ${avWrap(s, 150, mine)}
+      <div class="phero__name">${esc(s.name)}, ${s.age}</div>
+      <div class="phero__chips">
+        ${mine
+          ? `<span class="chip chip--verified">${ic('check', 14, 3)}In your circle</span>`
+          : `<span class="chip chip--warn">${ic('clock', 14, 2.4)}Not yet assigned</span>`}
+        <span class="chip chip--brand">${s.interest}% match</span>
       </div>
-      <p class="row__s" style="margin-top:14px;line-height:1.55">${esc(s.notes)}</p>
+      <div class="phero__meta">${ic('map-pin', 17, 2.1)}${esc(s.area)}</div>
     </div>
 
     ${sectionHead('What they need')}
-    <div class="card">${s.needs.map(n => row({ icon: 'check-circle', title: esc(n), chev: false, tag: 'div' })).join('')}</div>
+    <div class="card">
+      ${s.needs.map(n => `<div class="row">
+        <span class="row__ic">${ic(NEED_ICON[n] || 'check-circle', 22)}</span>
+        <span class="row__b"><span class="row__t">${esc(n)}</span></span>
+        <span class="row__chev">${ic('chev-right', 20, 2.2)}</span>
+      </div>`).join('')}
+    </div>
 
-    ${sectionHead('Health notes')}
-    <div class="chips">${s.conditions.map(c => chip(c, 'info')).join('')}</div>
+    ${sectionHead('Why you match')}
+    <div class="chips">
+      ${chip(s.livesAlone ? 'Lives alone' : 'Lives with family', '', 'home')}
+      ${s.conditions.map(c => chip(c, '', 'droplet')).join('')}
+      ${chip(s.area.split('·')[0].trim(), '', 'map-pin')}
+    </div>
+
+    <div class="callout callout--key">
+      <div class="callout__t">${ic('info', 14, 2.2)}Notes from the health centre</div>
+      ${esc(s.notes)}
+    </div>
+
+    <div class="worth">
+      <span class="worth__ic">${ic('wallet', 36, 1.9)}</span>
+      <span>
+        <span class="worth__k">This visit is worth</span>
+        <span class="worth__v">฿340</span>
+        <span class="worth__s">of professional time</span>
+      </span>
+    </div>
+
+    ${mine ? `<button class="btn btn--primary btn--block" data-act="nav" data-to="#/checkin/${s.id}">
+      ${ic('clipboard', 20, 2.1)} Log a check-in</button>`
+    : `<button class="btn btn--primary btn--block" data-act="offer" data-id="${s.id}">
+      ${ic('users', 20, 2.1)} Offer to support ${esc(s.name.split(' ').slice(-1)[0])}</button>`}
+
+    <div class="stack stack--sm">
+      <button class="btn btn--ghost btn--block" data-act="call" data-id="${s.id}">
+        ${ic('phone', 19, 2.1)} Call ${esc(s.name)}</button>
+    </div>
 
     ${cases.length ? `
     ${sectionHead('Raised to the nurse')}
@@ -795,15 +873,6 @@ V.senior = ({ a: id }) => {
       <div class="empty__t">No visits recorded yet</div>
       <div class="empty__s">Your first check-in will start the history for ${esc(s.name)}. A single reading says little — a trend is what the nurse needs.</div>
     </div></div>`}
-
-    <div class="stack stack--sm">
-      ${mine ? `<button class="btn btn--primary btn--block" data-act="nav" data-to="#/checkin/${s.id}">
-        ${ic('clipboard', 18, 2.1)} Log a check-in</button>` : ''}
-      <button class="btn btn--ghost btn--block" data-act="call" data-id="${s.id}">
-        ${ic('phone', 18, 2.1)} Call ${esc(s.name)}</button>
-      ${mine ? `<button class="btn btn--ghost btn--block" data-act="remove" data-id="${s.id}">
-        ${ic('x', 18, 2.2)} Remove from my circle</button>` : ''}
-    </div>
   </div>`;
 };
 
@@ -1097,44 +1166,90 @@ V.session = ({ a: id }) => {
   const s = S.sessions.filter(x => x.activityId === a.id).slice(-1)[0];
   const done = !!(s && s.completed);
   const present = s ? s.present : a.attendees;
+  const group = a.attendees.map(senior).filter(Boolean);
   return `
-  <div class="pad">
-    <div class="card card--pad">
-      <div class="row__t" style="font-size:var(--t-19)">${esc(a.title)}</div>
-      <div class="row__s">${esc(a.day)} · ${esc(a.time)}<br>${esc(a.place)}</div>
+  <div class="pad pad--top">
+    <div class="banner-ok">
+      <span class="banner-ok__ic">${ic('check', 19, 3)}</span>
+      <span>
+        <span class="banner-ok__t">${done ? 'Session completed' : 'Attendance open'}</span>
+        <span class="banner-ok__s">${done
+          ? `Logged at ${esc(s.time)} · ${s.present.length} attended`
+          : 'Tick everyone off as they arrive'}</span>
+      </span>
     </div>
 
-    <div class="callout callout--warn">
-      <div class="callout__t">${ic('alert', 14, 2.2)}Before anyone sets off</div>
-      Count heads at the start, at the halfway point and at the end. Put someone at the back so nobody walks alone. Carry water and a phone.
-    </div>
-
-    ${sectionHead('Attendance', `${present.length} present`)}
     <div class="card">
-      ${a.attendees.map((sid, i) => {
+      <div class="row">
+        <span class="row__ic row__ic--brand">${ic('calendar', 22)}</span>
+        <span class="row__b"><span class="row__t">${esc(a.day)}</span></span>
+      </div>
+      <div class="row">
+        <span class="row__ic row__ic--brand">${ic('clock', 22)}</span>
+        <span class="row__b"><span class="row__t">${esc(a.time)}</span></span>
+      </div>
+      <div class="row">
+        <span class="row__ic row__ic--brand">${ic('hourglass', 22)}</span>
+        <span class="row__b"><span class="row__t">1 hour</span></span>
+      </div>
+    </div>
+
+    <button class="card" data-act="nav" data-to="#/circle/act" style="text-align:left;width:100%">
+      <span class="row" style="padding:0">
+        <span style="padding:14px 0 14px 16px;display:flex">${av(a.attendees[0] ? senior(a.attendees[0]) : DATA.mentor, 48)}</span>
+        <span class="row__b" style="padding:14px 16px 14px 0">
+          <span class="row__t row__t--strong">${esc(a.title)}</span>
+          <span class="row__s">${esc(a.place)}</span>
+        </span>
+        <span class="row__chev" style="padding-right:16px">${ic('chev-right', 20, 2.2)}</span>
+      </span>
+    </button>
+
+    <div class="map">
+      ${mapFig()}
+      <button class="map__open" data-act="map">${ic('compass', 18, 2.1)} Open in Maps</button>
+    </div>
+
+    ${sectionHead('Attendance', `${present.length} of ${a.attendees.length} present`)}
+    <div class="card">
+      ${a.attendees.map(sid => {
         const p = senior(sid);
         if (!p) return '';
         const on = present.includes(sid);
         return `
-        <button class="att" aria-pressed="${on}" data-act="toggle-att" data-id="${a.id}" data-sid="${sid}">
+        <button class="checkrow" style="padding:11px 16px" aria-pressed="${on}" data-act="toggle-att" data-id="${a.id}" data-sid="${sid}">
           ${av(p, 40)}
           <span class="row__b">
-            <span class="row__t">${esc(p.name)}, ${p.age}</span>
+            <span class="row__t row__t--strong">${esc(p.name)}, ${p.age}</span>
             <span class="row__s">${on ? 'Present' : 'Not here yet'}</span>
           </span>
-          <span class="att__box">${ic('check', 17, 3)}</span>
+          <span class="checkrow__box">${ic('check', 16, 3.4)}</span>
         </button>`;
       }).join('')}
     </div>
 
+    ${sectionHead('Before you go')}
+    <div>
+      ${[
+        ['bag', 'Bring water and a phone'],
+        ['users', 'Someone sweeps at the back'],
+        ['shield', 'Nearest clinic noted'],
+      ].map(([icon, label]) => `
+      <div class="checkrow">
+        <span class="checkrow__ic">${ic(icon, 24, 2)}</span>
+        <span class="row__b"><span class="row__t">${esc(label)}</span></span>
+        <span class="checkrow__box">${ic('check', 16, 3.4)}</span>
+      </div>`).join('')}
+    </div>
+
     ${done ? `<div class="callout callout--key">
-      <div class="callout__t">${ic('check-circle', 14, 2.2)}Session completed</div>
-      Logged at ${esc(s.time)} · ${s.present.length} attended · ${s.hours} mentor hour${s.hours === 1 ? '' : 's'} added to your record.
+      <div class="callout__t">${ic('check-circle', 14, 2.2)}On your record</div>
+      ${s.hours} mentor hour${s.hours === 1 ? '' : 's'} added. ${s.present.length} of ${a.attendees.length} attended.
     </div>` : `
     <button class="btn btn--primary btn--block" data-act="complete-session" data-id="${a.id}">
-      ${ic('check', 19, 2.4)} Complete session</button>`}
+      ${ic('play', 20, 2.2)} Complete session</button>`}
 
-    <button class="btn btn--ghost btn--block" data-act="nav" data-to="#/circle/act">All activities</button>
+    <p class="helper">Count heads at the start, at the halfway point and at the end. Nobody walks alone at the back.</p>
   </div>`;
 };
 
@@ -1651,21 +1766,82 @@ function answersFromNurse() {
   return S.cases.filter(c => c.raisedByMentor && c.action).length;
 }
 
+/* The mockup's "•••" — gives that affordance something real to do per screen. */
+function moreItems(route) {
+  const items = [];
+  const s = route.a && senior(route.a);
+  const c = route.a && course(route.a);
+  const a = route.a && activity(route.a);
+
+  if (route.head === 'senior' && s) {
+    items.push(['Call ' + s.name, 'call', `data-id="${s.id}"`]);
+    if (S.circle.includes(s.id)) items.push(['Remove from my circle', 'remove', `data-id="${s.id}"`]);
+  }
+  if (route.head === 'course' && c) items.push(['Go to the quiz', 'nav', `data-to="#/quiz/${c.id}"`]);
+  if (route.head === 'lesson' && c) items.push(['Back to the module', 'nav', `data-to="#/course/${c.id}"`]);
+  if (route.head === 'activity' && a) {
+    items.push(S.joined.includes(a.id)
+      ? ['Leave this group', 'leave', `data-id="${a.id}"`]
+      : ['Join this group', 'join', `data-id="${a.id}"`]);
+  }
+  if (route.head === 'checkin') items.push(['Cancel this check-in', 'nav', 'data-to="#/home"']);
+
+  items.push([
+    S.role === 'nurse' ? 'Switch to the mentor view' : 'Switch to the professional view',
+    'switch-role', `data-role="${S.role === 'nurse' ? 'mentor' : 'nurse'}"`,
+  ]);
+  items.push(['Text size', 'nav', 'data-to="#/profile"']);
+  items.push(['Reset the demo', 'reset', '']);
+  return items;
+}
+
+function openMore(route) {
+  openSheet(`
+    <div class="sheet__t">${esc(titleFor(route))}</div>
+    <div class="sheet__s">Options for this screen.</div>
+    <div class="stack stack--sm">
+      ${moreItems(route).map(([label, act, data]) => `
+        <button class="row card" data-act="${act}" ${data} data-close="1">
+          <span class="row__b"><span class="row__t">${esc(label)}</span></span>
+        </button>`).join('')}
+    </div>
+    <button class="btn btn--ghost btn--block" style="margin-top:12px" data-act="sheet-close">Cancel</button>`);
+}
+
 function renderAppbar(route) {
   const bar = $('#appbar');
   if (!bar) return;
-  const tab = currentTab(route);
-  const isRoot = TAB_ROOTS.includes(route.head);
-  const title = isRoot ? (TITLES[tab] || TITLES[route.head] || 'Ha Koo Soong Wai') : titleFor(route);
+
   const openCases = S.cases.filter(c => c.status === 'open').length;
+  const alertDot = (S.role === 'nurse' && openCases)
+    ? `<span class="appbar__dot tnum">${openCases}</span>`
+    : (S.role === 'mentor' && answersFromNurse() ? `<span class="appbar__dot"></span>` : '');
+
+  // the mockup's home screen carries the brand block instead of a title
+  if (route.head === 'home' && S.role === 'mentor') {
+    const m = DATA.mentor;
+    bar.innerHTML = `<div class="brandbar">
+      ${mark(38)}
+      <div class="brandbar__text">
+        <div class="brandbar__name">Ha Koo<br>Soong Wai</div>
+        <div class="brandbar__tag">Seniors for a stronger community</div>
+      </div>
+      <button class="appbar__btn" data-act="notify" aria-label="Notifications">${ic('bell', 24, 1.9)}${alertDot}</button>
+    </div>`;
+    bar.style.padding = '2px 12px 12px 16px';
+    return;
+  }
+
+  bar.style.padding = '';
+  const isRoot = TAB_ROOTS.includes(route.head);
+  const title = isRoot ? (TITLES[currentTab(route)] || TITLES[route.head] || 'Ha Koo Soong Wai') : titleFor(route);
 
   bar.innerHTML = `
-    ${isRoot ? '' : `<button class="appbar__btn appbar__btn--back" data-act="back" aria-label="Go back">${ic('chev-left', 23, 2.3)}</button>`}
-    <h1 class="appbar__title ${isRoot ? '' : 'appbar__title--c'}">${esc(title)}</h1>
-    <button class="appbar__btn" data-act="notify" aria-label="Notifications">${ic('bell', 22, 2)}
-      ${S.role === 'nurse' && openCases ? `<span class="appbar__dot tnum">${openCases}</span>` : ''}
-      ${S.role === 'mentor' && answersFromNurse() ? `<span class="appbar__dot"></span>` : ''}
-    </button>`;
+    ${isRoot
+      ? `<button class="appbar__btn" data-act="notify" aria-label="Notifications">${ic('bell', 24, 1.9)}${alertDot}</button>`
+      : `<button class="appbar__btn appbar__btn--back" data-act="back" aria-label="Go back">${ic('chev-left', 24, 2.2)}</button>`}
+    <h1 class="appbar__title appbar__title--c">${esc(title)}</h1>
+    <button class="appbar__btn" data-act="more" aria-label="More options">${ic('more', 24, 2.4)}</button>`;
 }
 
 function renderTabbar(route) {
@@ -1810,8 +1986,39 @@ document.addEventListener('click', e => {
   if (!t) return;
   const act = t.dataset.act;
   const route = parse();
+  if (t.dataset.close) closeSheet();
 
   switch (act) {
+    case 'sheet-close':
+      // the backdrop closes the sheet; a click on the sheet itself does not
+      if (t.classList.contains('scrim') && e.target !== t) break;
+      closeSheet();
+      break;
+
+    case 'more':
+      openMore(route);
+      break;
+
+    case 'hero-next': {
+      const n = DATA.seniors.filter(x => S.circle.includes(x.id)).length || 1;
+      S.heroIdx = ((S.heroIdx || 0) + 1) % n;
+      save();
+      render({ keepScroll: true });
+      break;
+    }
+
+    case 'fav': {
+      const id = t.dataset.id;
+      S.favs = S.favs.includes(id) ? S.favs.filter(x => x !== id) : [...S.favs, id];
+      save();
+      render({ keepScroll: true });
+      toast(S.favs.includes(id) ? `${esc(senior(id).name)} saved to your favourites.` : 'Removed from favourites.', 'heart');
+      break;
+    }
+
+    case 'map':
+      toast('Opening the map for this location…', 'map-pin');
+      break;
     case 'nav':
       go(t.dataset.to);
       break;

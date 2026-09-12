@@ -80,6 +80,8 @@ const SHOTS = [
   ['circle-need', '#/circle'],
   ['circle-act', '#/circle/act'],
   ['senior-prasert', '#/senior/prasert'],
+  ['activity', '#/activity/walk'],
+  ['session', '#/session/chair'],
   ['checkin', '#/checkin/prasert'],
   ['result-crit', '#/result/prasert'],
   ['impact', '#/impact'],

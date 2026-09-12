@@ -171,7 +171,7 @@ async function goldenPath() {
   };
 
   await step('home shows a trainee banner', async () =>
-    (await evalJS(`document.body.innerText.includes('Finish your first module')`)) || false);
+    (await evalJS(`document.body.innerText.includes('Finish a module to be certified')`)) || false);
 
   await step('open the academy from the home quick actions', async () => {
     const r = await evalJS(`(() => {
@@ -339,9 +339,16 @@ async function secondaryFlows() {
     return after === before + 1 ? `circle grew ${before} → ${after}` : false;
   });
 
-  await step('remove that neighbour again', async () => {
+  await step('remove that neighbour again, through the ••• menu', async () => {
+    const before = await evalJS(`JSON.stringify(S.circle)`);
+    await click('[data-act="more"]');
+    const btn = await evalJS(`(() => { const b = document.querySelector('[data-act="remove"]');
+      return b ? b.outerHTML.slice(0, 120) : 'NO BUTTON'; })()`);
     await click('[data-act="remove"]');
-    return (await st()).circle.includes('somchai') ? false : 'removed';
+    const after = await evalJS(`JSON.stringify(S.circle)`);
+    const ok = !JSON.parse(after).includes('somchai');
+    if (!ok) note(`remove failed — in-memory ${before} → ${after}; button was ${btn}`);
+    return ok ? 'removed' : false;
   });
 
   await step('join a group', async () => {

@@ -98,8 +98,31 @@ Current status: **PASS** — no overflow, no clipped text, all targets ≥ 44 px
 
 ## A note on the design
 
-The users of this app are in their sixties and older, so the type scale, hit
-targets and contrast floors are set for them rather than for a screenshot: 17 px
-body text, 44 px minimum targets, everything checked against the surface it
-actually sits on, and a text-size control that scales type without moving layout
-so nothing breaks at 125%. Status is never carried by colour alone.
+The layout follows the app 1 mockup deliberately, so the two sides read as one
+product: the brand header over a greeting stack on Home, the hero card with a
+favourite button and pagination dots, the centred detail header with a `•••`
+menu, the centred profile block, and the blush / confirmation / map / checklist
+components — white cards on a white page, held apart by shadow rather than by a
+grey ground.
+
+Three places where the content could not map one-to-one, and what was done instead:
+
+- **Five tabs, not four.** The mockup's tab bar shows four destinations because
+  app 1 has four. App 2 has five — Home, Academy, Circle, Impact, Profile — so
+  the tab bar takes the mockup's *treatment* exactly (icon over label, maroon
+  when current, same sizes and spacing) while keeping app 2's information
+  architecture. Dropping Impact would have buried the screen the argument rests on.
+
+- **No photography.** The mockup's hero card is built around a portrait. With no
+  portraits available, the media panel carries the person's monogram on their
+  own gradient instead of a stand-in face.
+- **No payment.** App 2's mentors are unpaid, so the mockup's "You earn ฿350"
+  card would be a lie. The same component now reads *"This visit is worth ฿340
+  of professional time"* — the same geometry, carrying the app's actual argument.
+
+One deliberate deviation: the mockup sets body text at 14–16 px. The users of
+this app are in their sixties and older, so the base stays 17 px and every target
+44 px; the type *ratios* follow the mockup, the absolute sizes are tuned up.
+Contrast is checked against the surface each colour actually sits on, a text-size
+control scales type without moving layout, and status is never carried by colour
+alone.
