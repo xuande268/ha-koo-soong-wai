@@ -1836,12 +1836,15 @@ function renderAppbar(route) {
   const isRoot = TAB_ROOTS.includes(route.head);
   const title = isRoot ? (TITLES[currentTab(route)] || TITLES[route.head] || 'Ha Koo Soong Wai') : titleFor(route);
 
-  bar.innerHTML = `
-    ${isRoot
-      ? `<button class="appbar__btn" data-act="notify" aria-label="Notifications">${ic('bell', 24, 1.9)}${alertDot}</button>`
-      : `<button class="appbar__btn appbar__btn--back" data-act="back" aria-label="Go back">${ic('chev-left', 24, 2.2)}</button>`}
-    <h1 class="appbar__title appbar__title--c">${esc(title)}</h1>
-    <button class="appbar__btn" data-act="more" aria-label="More options">${ic('more', 24, 2.4)}</button>`;
+  // the mockup puts a back chevron and "•••" on detail screens, and nothing but
+  // the bell on a root tab — never a bell on the left
+  bar.innerHTML = isRoot
+    ? `<span style="width:44px;flex:none" aria-hidden="true"></span>
+       <h1 class="appbar__title appbar__title--c">${esc(title)}</h1>
+       <button class="appbar__btn" data-act="notify" aria-label="Notifications">${ic('bell', 24, 1.9)}${alertDot}</button>`
+    : `<button class="appbar__btn appbar__btn--back" data-act="back" aria-label="Go back">${ic('chev-left', 24, 2.2)}</button>
+       <h1 class="appbar__title appbar__title--c">${esc(title)}</h1>
+       <button class="appbar__btn" data-act="more" aria-label="More options">${ic('more', 24, 2.4)}</button>`;
 }
 
 function renderTabbar(route) {
